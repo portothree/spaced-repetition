@@ -1,1 +1,3 @@
-# spaced-repetition
+# Spaced repetition algorithm
+
+
