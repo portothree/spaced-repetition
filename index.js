@@ -1,19 +1,21 @@
 const AGAIN = -3;
 const HARD = -1;
 const GOOD = 1;
-const INTERVALS = [1, 2, 3, 8, 17];
-const SCORES = [AGAIN, HARD, GOOD];
+const DEFAULT_INTERVALS = [1, 2, 3, 8, 17];
+const DEFAULT_SCORES = [AGAIN, HARD, GOOD];
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 export default class Card {
 	constructor(
 		progress = 0,
-		dueDate = Math.round(new Date().getTime() / DAY_IN_MS)
+		dueDate = Math.round(new Date().getTime() / DAY_IN_MS),
+		intervals = DEFAULT_INTERVALS,
+		scoreToProgressChange = DEFAULT_SCORES
 	) {
 		this.progress = progress;
 		this.dueDate = dueDate;
-		this.intervals = INTERVALS;
-		this.scoreToProgressChange = SCORES;
+		this.intervals = intervals;
+		this.scoreToProgressChange = scoreToProgressChange;
 	}
 
 	get maxProgress() {
