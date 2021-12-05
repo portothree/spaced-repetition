@@ -28,10 +28,11 @@ export default class Card {
 			correct && progress < this.maxProgress
 				? dueDate + this.intervals[progress]
 				: dueDate + 1;
+		const newProgress = progress + score;
 
 		return {
 			dueDate: newDueDate,
-			progress: progress++ ?? 0,
+			progress: newProgress ?? 0,
 		};
 	}
 }
