@@ -32,7 +32,7 @@ export default class Card {
 
 		return {
 			dueDate: newDueDate,
-			progress: newProgress ?? 0,
+			progress: newProgress < 0 ? 0 : newProgress,
 		};
 	}
 }

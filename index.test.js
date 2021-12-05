@@ -5,12 +5,31 @@ const lastDueDate = Math.round(new Date('2000-01-01').getTime() / DAY_IN_MS);
 
 describe(Card.name, () => {
 	test.each([
-		[{ progress: 0, dueDate: lastDueDate }],
-		[{ progress: 1, dueDate: lastDueDate }],
-		[{ progress: 2, dueDate: lastDueDate }],
-		[{ progress: 3, dueDate: lastDueDate }],
-		[{ progress: 4, dueDate: lastDueDate }],
-	])('HARD - record: %O', (record) => {
+		[{ progress: 0, dueDate: lastDueDate }, 0],
+		[{ progress: 1, dueDate: lastDueDate }, 0],
+		[{ progress: 2, dueDate: lastDueDate }, 0],
+		[{ progress: 3, dueDate: lastDueDate }, 0],
+		[{ progress: 4, dueDate: lastDueDate }, 1],
+	])('AGAIN - record: %O, newProgress: %i', (record, newProgress) => {
+		const score = -3;
+		const card = new Card(record.progress, record.dueDate);
+		const updatedRecord = card.calculate(score, record);
+
+		expect(updatedRecord).toEqual(
+			expect.objectContaining({
+				dueDate: record.dueDate + 1,
+				progress: newProgress,
+			})
+		);
+	});
+
+	test.each([
+		[{ progress: 0, dueDate: lastDueDate }, 0],
+		[{ progress: 1, dueDate: lastDueDate }, 0],
+		[{ progress: 2, dueDate: lastDueDate }, 1],
+		[{ progress: 3, dueDate: lastDueDate }, 2],
+		[{ progress: 4, dueDate: lastDueDate }, 3],
+	])('HARD - record: %O, newProgress: %i', (record, newProgress) => {
 		const score = -1;
 		const card = new Card(record.progress, record.dueDate);
 		const updatedRecord = card.calculate(score, record);
@@ -18,7 +37,7 @@ describe(Card.name, () => {
 		expect(updatedRecord).toEqual(
 			expect.objectContaining({
 				dueDate: record.dueDate + 1,
-				progress: record.progress + score,
+				progress: newProgress,
 			})
 		);
 	});
