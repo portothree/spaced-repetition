@@ -13,7 +13,7 @@ describe(Card.name, () => {
 	])('AGAIN - record: %O, newProgress: %i', (record, newProgress) => {
 		const score = -3;
 		const card = new Card(record.progress, record.dueDate);
-		const updatedRecord = card.calculate(score, record);
+		const updatedRecord = card.review(score, record);
 
 		expect(updatedRecord).toEqual(
 			expect.objectContaining({
@@ -32,7 +32,7 @@ describe(Card.name, () => {
 	])('HARD - record: %O, newProgress: %i', (record, newProgress) => {
 		const score = -1;
 		const card = new Card(record.progress, record.dueDate);
-		const updatedRecord = card.calculate(score, record);
+		const updatedRecord = card.review(score, record);
 
 		expect(updatedRecord).toEqual(
 			expect.objectContaining({
@@ -51,7 +51,7 @@ describe(Card.name, () => {
 	])('GOOD - record: %O, nextDueDate: %i', (record, nextDueDate) => {
 		const score = 1;
 		const card = new Card(record.progress, record.dueDate);
-		const updatedRecord = card.calculate(score, record);
+		const updatedRecord = card.review(score, record);
 
 		expect(updatedRecord).toEqual(
 			expect.objectContaining({

@@ -22,7 +22,7 @@ export default class Card {
 		return this.intervals.length;
 	}
 
-	calculate(score, { progress, dueDate }) {
+	review(score, { dueDate, progress }) {
 		const correct = score === GOOD;
 		const newDueDate =
 			correct && progress < this.maxProgress
