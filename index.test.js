@@ -17,7 +17,7 @@ describe(Record.name, () => {
 
 		expect(updatedRecord).toEqual(
 			expect.objectContaining({
-				dueDate: record.dueDate + 1,
+				dueDate: expect.any(Number),
 				progress: newProgress,
 			})
 		);
@@ -36,7 +36,7 @@ describe(Record.name, () => {
 
 		expect(updatedRecord).toEqual(
 			expect.objectContaining({
-				dueDate: record.dueDate + 1,
+				dueDate: expect.any(Number),
 				progress: newProgress,
 			})
 		);
