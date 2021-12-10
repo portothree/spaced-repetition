@@ -17,6 +17,7 @@
 	"bugs": {
 		"url": "https://github.com/portothree/spaced-repetition/issues"
 	},
+	"files": ["index.js"],
 	"homepage": "https://github.com/portothree/spaced-repetition#readme",
 	"devDependencies": {
 		"@babel/core": "^7.16.0",
