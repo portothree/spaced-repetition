@@ -5,7 +5,7 @@ const DEFAULT_INTERVALS = [1, 2, 3, 8, 17];
 const DEFAULT_SCORES = [AGAIN, HARD, GOOD];
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
-export default class Card {
+export default class Record {
 	constructor(
 		progress = 0,
 		dueDate = Math.round(new Date().getTime() / DAY_IN_MS),
@@ -22,17 +22,25 @@ export default class Card {
 		return this.intervals.length;
 	}
 
-	review(score, { dueDate, progress }) {
+	get againDueDate() {
+		// Tomorrow
+		return Math.round(new Date().getTime() / DAY_IN_MS) + 1;
+	}
+
+	review(score) {
 		const correct = score === GOOD;
 		const newDueDate =
-			correct && progress < this.maxProgress
-				? dueDate + this.intervals[progress]
-				: dueDate + 1;
-		const newProgress = progress + score;
+			correct && this.progress < this.maxProgress
+				? this.dueDate + this.intervals[this.progress]
+				: this.againDueDate;
+		const newProgress = this.progress + score;
+
+		this.dueDate = newDueDate;
+		this.progress = newProgress < 0 ? 0 : newProgress;
 
 		return {
-			dueDate: newDueDate,
-			progress: newProgress < 0 ? 0 : newProgress,
+			dueDate: this.dueDate,
+			progress: this.progress,
 		};
 	}
 }
